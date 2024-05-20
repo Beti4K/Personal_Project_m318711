@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
     private int radius;
+
+    [SerializeField] PlayerController player;
+
     [SerializeField] GameObject obstacle;
     [SerializeField] GameObject enemy;
     void Start()
@@ -26,6 +31,22 @@ public class SpawnManager : MonoBehaviour
 
         Instantiate(prefab, spawnPosition, Quaternion.identity);
         yield return new WaitForSeconds(time);
-        StartCoroutine(SpawnObject(prefab, min, max, time));
+        if (player.isGameActive)
+        {
+            StartCoroutine(SpawnObject(prefab, min, max, time));
+        }
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit(); 
+#endif
     }
 }

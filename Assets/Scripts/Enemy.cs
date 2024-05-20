@@ -5,16 +5,27 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform player;
+    private GameObject player;
     private float speed = 3.0f;
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameObject.Find("Player");
     }
 
     void Update()
     {
-        transform.LookAt(player);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        if(player.GetComponent<PlayerController>().isGameActive)
+        {
+            transform.LookAt(player.GetComponent<Transform>());
+            transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<Transform>().position, speed * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerController>().TakeDamage(1);
+        }
     }
 }
