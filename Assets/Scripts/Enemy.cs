@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : MonoBehaviour
 {
     private GameObject player;
-    private float speed = 1.0f;
+    private float speed = 2.0f;
     void Start()
     {
         player = GameObject.Find("Player");
