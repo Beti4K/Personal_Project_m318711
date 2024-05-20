@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    private GameObject player;
+    private Transform player;
     private float speed = 4.0f;
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     void Update()
     {
-        Vector3.Lerp(transform.position, player.transform.position, speed * Time.deltaTime);
+        transform.LookAt(player);
+        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
 }
