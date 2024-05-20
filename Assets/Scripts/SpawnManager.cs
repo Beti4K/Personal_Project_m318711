@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] GameObject obstacle;
     [SerializeField] GameObject enemy;
-    void Start()
+    public void StartSpawn()
     {
         StartCoroutine(SpawnObject(obstacle, 5, 7, 5));
         StartCoroutine(SpawnObject(enemy, 4, 6, 2));

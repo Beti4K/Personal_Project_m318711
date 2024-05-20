@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         else if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
+            player.GetComponent<PlayerController>().GainScore(10);
         }
     }
 }

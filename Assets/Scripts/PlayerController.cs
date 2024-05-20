@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject GameOverScreen;
+    [SerializeField] GameObject StartScreen;
     [SerializeField] TextMeshProUGUI healthDisplay;
     [SerializeField] TextMeshProUGUI scoreDisplay;
 
@@ -17,13 +18,20 @@ public class PlayerController : MonoBehaviour
     public int score;
     public int maxHealth;
 
-    public bool isGameActive = true;
+    public bool isGameActive = false;
     void Start()
     {
         maxHealth = 5;
         health = maxHealth;
         healthDisplay.text = "Health: " + health + "/" + maxHealth;
         scoreDisplay.text = "Score: " + score;
+    }
+
+    public void StartGame()
+    {
+        isGameActive = true;
+        StartScreen.SetActive(false);
+        GameObject.Find("SpawnManager").GetComponent<SpawnManager>().StartSpawn();
     }
 
     void Update()
@@ -48,11 +56,16 @@ public class PlayerController : MonoBehaviour
         healthDisplay.text = "Health: " + health + "/" + maxHealth;
         if (health <= 0)
         {
+            health = 0;
             GameOver();
         }
     }
 
-
+    public void GainScore(int amount)
+    {
+        score += amount;
+        scoreDisplay.text = "Score: " + score;
+    }
 
     void GameOver()
     {
