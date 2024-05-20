@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnObject(obstacle, 5, 7, 5));
-        StartCoroutine(SpawnObject(enemy, 3, 6, 2));
+        StartCoroutine(SpawnObject(enemy, 4, 6, 2));
     }
 
     IEnumerator SpawnObject(GameObject prefab, int min, int max, int time)

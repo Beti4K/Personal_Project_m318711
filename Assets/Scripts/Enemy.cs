@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : MonoBehaviour
 {
     private Transform player;
-    private float speed = 4.0f;
+    private float speed = 3.0f;
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Transform>();
