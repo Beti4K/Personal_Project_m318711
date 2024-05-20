@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] float speed;
     void Start()
     {
         
@@ -17,24 +18,9 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > -24)
-        {
-            transform.Translate(Vector3.left);
-        }
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < 24)
-        {
-            transform.Translate(Vector3.right);
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.z > -24)
-        {
-            transform.Translate(Vector3.back);
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.z < 24)
-        {
-            transform.Translate(Vector3.forward);
-        }
+        transform.position += new Vector3(horizontal * speed * Time.deltaTime, 0, vertical * speed * Time.deltaTime);
     }
 }

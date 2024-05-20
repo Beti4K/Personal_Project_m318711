@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    private Vector3 offset = new Vector3(0, 9, 0);
-    public GameObject player;
-    // Start is called before the first frame update
+    private Vector3 offset = new Vector3(0, 15, 0);
+    [SerializeField] GameObject player;
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = player.transform.position + offset;
