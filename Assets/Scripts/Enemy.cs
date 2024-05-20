@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : MonoBehaviour
 {
     private GameObject player;
-    private float speed = 3.0f;
+    private float speed = 1.0f;
     void Start()
     {
         player = GameObject.Find("Player");
@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerController>().TakeDamage(1);
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
         }
     }
 }

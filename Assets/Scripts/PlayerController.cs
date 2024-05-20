@@ -7,10 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject GameOverScreen;
     [SerializeField] TextMeshProUGUI healthDisplay;
+    [SerializeField] TextMeshProUGUI scoreDisplay;
 
     private float speed = 5.0f;
 
+    public Vector3 mousePosition;
+
     public int health;
+    public int score;
     public int maxHealth;
 
     public bool isGameActive = true;
@@ -19,6 +23,7 @@ public class PlayerController : MonoBehaviour
         maxHealth = 5;
         health = maxHealth;
         healthDisplay.text = "Health: " + health + "/" + maxHealth;
+        scoreDisplay.text = "Score: " + score;
     }
 
     void Update()
@@ -46,6 +51,8 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
     }
+
+
 
     void GameOver()
     {
