@@ -4,36 +4,28 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private int border = 21;
     private int radius;
     [SerializeField] GameObject obstacle;
     [SerializeField] GameObject enemy;
     void Start()
     {
-        StartCoroutine(SpawnObstacle());
-        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnObject(obstacle, 5, 7, 5));
+        StartCoroutine(SpawnObject(enemy, 3, 6, 2));
     }
 
-    IEnumerator SpawnObstacle()
+    IEnumerator SpawnObject(GameObject prefab, int min, int max, int time)
     {
-        Instantiate(obstacle, new Vector3(Random.Range(-border, border), 0.5f, Random.Range(-border, border)), Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        StartCoroutine(SpawnObstacle());
-    }
-
-    IEnumerator SpawnEnemy()
-    {
-        //Setting spawn direction
+        //Setting spawn directions
         Vector3 spawnDirection = Random.onUnitSphere;
         spawnDirection.y = 0;
         spawnDirection.Normalize();
 
         //Setting spawn position based on direction + player position
-        radius = Random.Range(3, 6);
+        radius = Random.Range(min, max);
         Vector3 spawnPosition = GameObject.Find("Player").transform.position + spawnDirection * radius;
 
-        Instantiate(enemy, spawnPosition, Quaternion.identity);
-        yield return new WaitForSeconds(2);
-        StartCoroutine(SpawnEnemy());
+        Instantiate(prefab, spawnPosition, Quaternion.identity);
+        yield return new WaitForSeconds(time);
+        StartCoroutine(SpawnObject(prefab, min, max, time));
     }
 }
